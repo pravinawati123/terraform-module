@@ -35,3 +35,17 @@ module "application_load_balancer" {
   instance_target_id = module.ec2.id
 
 }
+
+module "route" {
+  source = "./modules/route53"
+  domain_name = "centrictest.com"
+  zone_id     = "Z10163813501682JAMKJY"
+  records = [
+    {
+      name    = "pravin"
+      type    = "CNAME"
+      ttl     = 300
+      records = ["www.centrictest.com"]
+    }
+  ]
+}
