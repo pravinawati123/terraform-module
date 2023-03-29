@@ -34,7 +34,7 @@ variable "target_id" {
 
 }
 
-# Route 53 variables
+# Route53 variables
 variable "domain_name" {
   default     = "centrictest.com"
   description = "domain name"
