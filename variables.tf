@@ -43,8 +43,32 @@ variable "domain_name" {
 }
 
 variable "record_name" {
-  default     = "www"
+  default     = "pravin"
   description = "sub domain name"
   type        = string
 
+}
+
+variable "record_zone_id" {
+  default = "Z0594050DL9BQQJBZE4D"
+  type = string
+  
+}
+
+variable "record_value" {
+  default = "VIP-alb-1646832368.us-west-2.elb.amazonaws.com"
+  type = string
+  
+}
+
+variable "record_type" {
+  default = "CNAME"
+  type = string
+  
+}
+
+variable "record_ttl" {
+  default = "300"
+  type = string
+  
 }

@@ -8,18 +8,27 @@ variable "domain_name" {
 
 } */
 
-variable "zone_id" {
+variable "record_zone_id" {
   type  = string
   description = "The ID of the Route53 zone where you want to create records"
 
 }
 
-variable "records" {
-  type        = list(object({
-  name        = string
-  type        = string
-  ttl         = number
-  records     = list(string)
-  }))
-  description = "The list of Route53 records to create"
+variable "record_name" {
+  type  = string
+
+}
+
+variable "record_type" {
+  type  = string
+
+}
+
+variable "record_ttl" {
+  type  = string
+
+}
+
+variable "record_value" {
+
 }

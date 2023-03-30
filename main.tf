@@ -38,14 +38,10 @@ module "application_load_balancer" {
 
 module "route" {
   source = "./modules/route53"
-  domain_name = "centrictest.com"
-  zone_id     = "Z10163813501682JAMKJY"
-  records = [
-    {
-      name    = "pravin"
-      type    = "CNAME"
-      ttl     = 300
-      records = ["www.centrictest.com"]
-    }
-  ]
+  domain_name    = var.domain_name
+  record_name    = var.record_name
+  record_type    = var.record_type
+  record_ttl     = var.record_ttl
+  record_value   = [var.record_value]
+  record_zone_id = var.record_zone_id
 }
