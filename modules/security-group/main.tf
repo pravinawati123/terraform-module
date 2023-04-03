@@ -1,23 +1,24 @@
-#Create Security group
-resource "aws_security_group" "demo_sg" {
-  name =  "security group using Terraform module"
-  description = "Security group using Terraform"
-  vpc_id = var.vpc_id
+resource "aws_security_group" "this" {
+  name_prefix = var.name
+  vpc_id      = var.vpc_id
 
-  tags = {
-    Name = "VIP_SG"
-  }
+  ingress = [
+    for rule in var.inbound_rules :
+    {
+      from_port   = rule.from_port
+      to_port     = rule.to_port
+      protocol    = rule.protocol
+      cidr_blocks = rule.cidr_blocks
+    }
+  ]
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  egress = [
+    for rule in var.outbound_rules :
+    {
+      from_port   = rule.from_port
+      to_port     = rule.to_port
+      protocol    = rule.protocol
+      cidr_blocks = rule.cidr_blocks
+    }
+  ]
 }
