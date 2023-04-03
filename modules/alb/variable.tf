@@ -1,12 +1,12 @@
 variable "security_group_id" {
-    type = string
+  type = string
 }
-variable "subnet_id1" {   
-    type = string
+variable "subnet_id1" {
+  type = string
 }
 
-variable "subnet_id2" {   
-    type = string
+variable "subnet_id2" {
+  type = string
 }
 
 variable "vpc_id" {

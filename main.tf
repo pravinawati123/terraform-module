@@ -7,9 +7,34 @@ terraform {
 }
 
 module "security-group" {
-  source = "./modules/security-group"
-  vpc_id = var.aws_vpcid
+  source = "./modules/security_group"
 
+  name   = "web-sg"
+  vpc_id = var.vpc_id
+
+  inbound_rules = [
+    {
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
+
+  outbound_rules = [
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 }
 
 
@@ -37,7 +62,7 @@ module "application_load_balancer" {
 }
 
 module "route" {
-  source = "./modules/route53"
+  source         = "./modules/route53"
   domain_name    = var.domain_name
   record_name    = var.record_name
   record_type    = var.record_type
